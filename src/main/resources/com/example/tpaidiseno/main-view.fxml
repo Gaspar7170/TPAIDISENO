@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+
+
+    <VBox xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="com.example.tpaidiseno.Pantallas.MainController"
+          prefHeight="500" prefWidth="500">
+
+        <GridPane style="-fx-background-color: #EBCFCD;">
+            <columnConstraints>
+                <ColumnConstraints percentWidth="8" />
+                <ColumnConstraints percentWidth="92" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints percentHeight="12.75" />
+                <RowConstraints percentHeight="87.25" />
+            </rowConstraints>
+
+            <!-- Background Image -->
+            <ImageView fx:id="wallPapper" GridPane.columnIndex="1" GridPane.rowSpan="2">
+                <image>
+                    <Image url="@/bonVinoWall.png"/>
+                </image>
+            </ImageView>
+
+            <!-- Show Grid -->
+            <GridPane fx:id="showGrid" GridPane.columnIndex="1" GridPane.rowSpan="2"/>
+
+            <!-- Home Button -->
+            <VBox alignment="TOP_CENTER" GridPane.rowIndex="1">
+                <Button fx:id="homeButton" onAction="#handleHomeButton"
+                        style="-fx-background-color: #D0AFEB;"
+                        prefWidth="50" prefHeight="50">
+                    <graphic>
+                        <ImageView fitHeight="50" fitWidth="50">
+                            <image>
+                                <Image url="@/home.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
+                <!-- Other buttons similar structure -->
+            </VBox>
+
+
+            <ImageView fx:id="profile" fitWidth="100" fitHeight="100" GridPane.columnIndex="1" GridPane.rowSpan="3"/>
+        </GridPane>
+
+    </VBox>
+
+
