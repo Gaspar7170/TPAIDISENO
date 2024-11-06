@@ -2,7 +2,7 @@ package com.example.tpaidiseno.Gestores;
 
 
 import com.example.tpaidiseno.Entidades.*;
-import com.example.tpaidiseno.Pantallas.PantallaImportarActualizacion;
+import com.example.tpaidiseno.PantallaImportarActualizacion;
 //import BonVinoGrupo12.Modelo.*;
 
 import javax.swing.*;
@@ -99,7 +99,7 @@ public class GestorImportarActualizacion {
 
     // Paso 5 y 6 del Caso de Uso
     private void actualizarOCrearVinos() {
-        List<String[]> resumenVinos = new ArrayList<>();
+        List<Object> resumenVinos = new ArrayList<>();
 
         for (Vino vinoActualizar : listadoVinosActualizarBodega) {
             boolean alternativa = existeEsteVino(vinoActualizar);

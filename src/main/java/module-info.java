@@ -13,8 +13,8 @@ module com.example.tpaidiseno {
     requires java.desktop;
 
     opens com.example.tpaidiseno to javafx.fxml;
-    opens com.example.tpaidiseno.Pantallas to javafx.fxml;
+   // opens com.example.tpaidiseno.Pantallas to javafx.fxml;
 
     exports com.example.tpaidiseno;
-    exports com.example.tpaidiseno.Pantallas;
+    //exports com.example.tpaidiseno.Pantallas;
 }

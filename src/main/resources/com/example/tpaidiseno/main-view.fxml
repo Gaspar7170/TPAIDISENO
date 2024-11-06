@@ -12,10 +12,10 @@
 
     <VBox xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
-          fx:controller="com.example.tpaidiseno.Pantallas.MainController"
+          fx:controller="com.example.tpaidiseno.MainController"
           prefHeight="500" prefWidth="500">
 
-        <GridPane style="-fx-background-color: #EBCFCD;">
+        <GridPane fx:id="main" style="-fx-background-color: #EBCFCD;">
             <columnConstraints>
                 <ColumnConstraints percentWidth="8" />
                 <ColumnConstraints percentWidth="92" />
@@ -33,7 +33,7 @@
             </ImageView>
 
             <!-- Show Grid -->
-            <GridPane fx:id="showGrid" GridPane.columnIndex="1" GridPane.rowSpan="2"/>
+            <GridPane fx:id="showGrid" GridPane.columnIndex="0" GridPane.rowSpan="1"/>
 
             <!-- Home Button -->
             <VBox alignment="TOP_CENTER" GridPane.rowIndex="1">
@@ -48,11 +48,21 @@
                         </ImageView>
                     </graphic>
                 </Button>
+
+                <Button fx:id="importButton" onAction="#handleImportarActualizacion"
+                        style="-fx-background-color: #D0AFEB;"
+                        prefWidth="50" prefHeight="50">
+                    <graphic>
+                        <ImageView fitHeight="50" fitWidth="50">
+                            <image>
+                                <Image url="@/cu5ICO.png"/>
+                            </image>
+                        </ImageView>
+                    </graphic>
+                </Button>
                 <!-- Other buttons similar structure -->
             </VBox>
 
-
-            <ImageView fx:id="profile" fitWidth="100" fitHeight="100" GridPane.columnIndex="1" GridPane.rowSpan="3"/>
         </GridPane>
 
     </VBox>

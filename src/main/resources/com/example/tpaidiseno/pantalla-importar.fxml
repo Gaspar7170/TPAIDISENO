@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+
+<GridPane fx:id="main" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tpaidiseno.PantallaImportarActualizacion">
+    <columnConstraints>
+        <ColumnConstraints hgrow="ALWAYS" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints vgrow="ALWAYS" />
+        <RowConstraints vgrow="ALWAYS" />
+    </rowConstraints>
+
+    <GridPane fx:id="gridBodegasActualizar" GridPane.rowIndex="0">
+        <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS" />
+            <ColumnConstraints hgrow="ALWAYS" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints vgrow="ALWAYS" />
+            <RowConstraints vgrow="ALWAYS" />
+            <RowConstraints vgrow="ALWAYS" />
+            <RowConstraints vgrow="ALWAYS" />
+        </rowConstraints>
+
+        <Label text="Bodega para Actualizar" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-size: 60px; -fx-font-weight: bold; -fx-text-fill: white;" />
+
+        <TableView fx:id="bodegasTableView" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-size: 24px; -fx-border-color: transparent; -fx-background-color: transparent;">
+            <columns>
+                <TableColumn text="Nombre de Bodega" prefWidth="200" />
+            </columns>
+        </TableView>
+
+        <Button fx:id="seleccionBodegaBoton" text="Seleccionar" GridPane.columnIndex="1" GridPane.rowIndex="2" style="-fx-font-size: 30px;" />
+
+        <TextField fx:id="bodegaSeleccionadaTextbox" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" style="-fx-font-size: 40px;" />
+
+        <Label text="Bodega Seleccionada" GridPane.columnIndex="1" GridPane.rowIndex="2" style="-fx-font-size: 50px; -fx-font-weight: bold; -fx-text-fill: white;" />
+
+        <Label text="CASO USO 5" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="0" style="-fx-font-size: 70px; -fx-font-weight: bold; -fx-text-fill: white;" />
+    </GridPane>
+
+    <GridPane fx:id="gridMostrarResumenVino" GridPane.rowIndex="1" visible="false">
+        <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS" />
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints vgrow="ALWAYS" />
+            <RowConstraints vgrow="ALWAYS" />
+        </rowConstraints>
+
+        <Label text="Resumen de Vinos Actualizados" GridPane.columnIndex="0" GridPane.rowIndex="0" style="-fx-font-size: 60px; -fx-font-weight: bold; -fx-text-fill: white;" />
+
+        <TableView fx:id="resumenTableView" GridPane.columnIndex="0" GridPane.rowIndex="1" style="-fx-font-size: 24px; -fx-border-color: transparent; -fx-background-color: transparent;" />
+    </GridPane>
+</GridPane>

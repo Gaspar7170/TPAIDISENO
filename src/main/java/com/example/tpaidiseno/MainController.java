@@ -1,4 +1,4 @@
-package com.example.tpaidiseno.Pantallas;
+package com.example.tpaidiseno;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -7,9 +7,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.event.ActionEvent;
 
-import java.io.File;
 import java.io.InputStream;
-import java.util.Objects;
 
 public class MainController {
     @FXML
@@ -44,6 +42,7 @@ public class MainController {
             profile.setFitWidth(100); // Ajusta el ancho
             profile.setFitHeight(100); // Ajusta la altura
             // Inicializar otras imágenes y componentes
+            showGrid.add(profile,1,1);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -52,16 +51,21 @@ public class MainController {
     @FXML
     private void handleHomeButton(ActionEvent event) {
         showGrid.getChildren().clear();
+        initialize();
     }
 
     @FXML
-        private void handleImportarActualizacion(ActionEvent event) {
+    private void handleImportarActualizacion(ActionEvent event) {
         habilitarPantalla();
     }
 
     private void habilitarPantalla() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("pantalla-importar.fxml"));
+            if (loader.getLocation() == null) {
+                System.err.println("No se pudo encontrar el archivo FXML: pantalla-importar.fxml");
+                return;
+            }
             showGrid.getChildren().clear();
             showGrid.getChildren().add(loader.load());
         } catch (Exception e) {
