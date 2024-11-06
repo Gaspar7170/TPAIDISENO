@@ -2,6 +2,9 @@ package com.example.tpaidiseno.Gestores;
 
 
 import com.example.tpaidiseno.Entidades.*;
+import com.example.tpaidiseno.Interfaces.IObserverNotificacionActualizacion;
+import com.example.tpaidiseno.Interfaces.ISujetoNotificacionActualizacion;
+import com.example.tpaidiseno.Pantallas.NotificacionVinoActualizado;
 import com.example.tpaidiseno.Pantallas.PantallaImportarActualizacion;
 //import BonVinoGrupo12.Modelo.*;
 
@@ -12,7 +15,7 @@ import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GestorImportarActualizacion {
+public class GestorImportarActualizacion implements ISujetoNotificacionActualizacion {
 
     // Atributos
     private final PantallaImportarActualizacion pantalla;
@@ -28,6 +31,7 @@ public class GestorImportarActualizacion {
     private final List<Varietal> listadoVariedadesCompleto = new ArrayList<>();
     private final List<Enofilo> listadoEnofilosAplicacion = new ArrayList<>();
     private boolean activarAlternativo3 = false;
+    private List<IObserverNotificacionActualizacion> observers = new ArrayList<>();
 
     // Constructor
     public GestorImportarActualizacion(PantallaImportarActualizacion pan) {
@@ -188,10 +192,31 @@ public class GestorImportarActualizacion {
     }
 
     private void notificarActualizacionesDeVino(Enofilo notificacion) {
-        // Implementación futura con Observer (TP3)
+
     }
 
     private void crearListadoVinos() {
         // Lógica para crear listado de vinos
+    }
+
+
+    @Override
+    public void notificar(String nomBodega, Date fecha, Vino[] listadoVino) {
+        for (IObserverNotificacionActualizacion observador : observers){
+            observador.notificarActualizacionesDeVino(nomBodega,fecha,listadoVino);
+        }
+
+    }
+
+    @Override
+    public void quitar(IObserverNotificacionActualizacion observador) {
+        observers.remove(observador);
+
+    }
+
+    @Override
+    public void subscribir(IObserverNotificacionActualizacion observador) {
+        observers.add(observador);
+
     }
 }
