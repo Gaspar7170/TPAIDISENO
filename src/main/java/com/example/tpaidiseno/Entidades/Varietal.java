@@ -5,6 +5,7 @@ public class Varietal {
     private String nombre;
     private double porcentajeComposicion;
     private TipoUva tipoUva;
+    private String descripcion;
 
     public Varietal() {
 
@@ -43,6 +44,8 @@ public class Varietal {
     public void setTipoUva(TipoUva tipoUva) {
         this.tipoUva = tipoUva;
     }
+
+    public String getDescripcion() {return descripcion;}
 
     // endregion
 }

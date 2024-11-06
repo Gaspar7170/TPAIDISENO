@@ -15,7 +15,7 @@ public class DAOTipoUva {
 
     public static List<TipoUva> getAll(){
         Connection con = SQLiteConnection.connect();
-        String sql = "SELECT id,nombre,descripcion FROM tipos_uvas ";
+        String sql = "SELECT id,nombre,descripcion FROM tipos_uva ";
         List<TipoUva> tiposUvas = new ArrayList<>();
         try {
             PreparedStatement ps = con.prepareStatement(sql);

@@ -12,26 +12,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DAOBodega {
-    public static List<Bodega> getAll(){
-        Connection con = SQLiteConnection.connect();
-        String sql = "SELECT id,nombre,fecha_fundacion,calificacion FROM bodegas ";
+    public static List<Bodega> getAll() {
         List<Bodega> bodegas = new ArrayList<>();
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+        String sql = "SELECT id, nombre, fecha_ultima_actualizacion, periodo FROM bodegas";
 
-            while (rs.next()){
+        try (Connection con = SQLiteConnection.connect();
+             PreparedStatement ps = con.prepareStatement(sql,
+                     ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
                 Bodega bodega = new Bodega();
                 bodega.setNombre(rs.getString("nombre"));
-
                 bodegas.add(bodega);
             }
 
-        }catch (SQLException eSql){
+        } catch (SQLException eSql) {
             eSql.printStackTrace();
         }
+
         return bodegas;
     }
+
 
     public static Bodega getById(int id){
         Connection con = SQLiteConnection.connect();
