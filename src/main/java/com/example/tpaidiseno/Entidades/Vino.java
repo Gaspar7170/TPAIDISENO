@@ -41,49 +41,74 @@ public class Vino {
         return LocalDateTime.now().isAfter(fechaActualizacion);
     }
 
-    public String getNombre() {
-        return nombre;
-    }
-
     public Bodega getBodega() {
         return bodega;
     }
 
-    public double getPrecio() {
-        return precioARS;
+    public void setBodega(Bodega bodega) {
+        this.bodega = bodega;
     }
 
-    public void setPrecio(double precio) {
-        this.precioARS = precio;
+    public int getAniada() {
+        return aniada;
     }
 
-    public void setNotaCata(String nota) {
-        this.notaDeCataBodega = nota;
+    public void setAniada(int aniada) {
+        this.aniada = aniada;
     }
 
-    public String getNota() {
+    public String getNombre() {
+        return nombre;
+    }
+
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getNotaDeCataBodega() {
         return notaDeCataBodega;
     }
 
-    public void setImagenEtiqueta(Image imag) {
-        this.imagenEtiqueta = imag;
+    public void setNotaDeCataBodega(String notaDeCataBodega) {
+        this.notaDeCataBodega = notaDeCataBodega;
+    }
+
+    public double getPrecioARS() {
+        return precioARS;
+    }
+
+    public void setPrecioARS(double precioARS) {
+        this.precioARS = precioARS;
+    }
+
+    public void setVariedades(List<Varietal> variedades) {
+        this.variedades = variedades;
     }
 
     public Image getImagenEtiqueta() {
         return imagenEtiqueta;
     }
 
-    public void setFechaActualizacion(LocalDateTime fecha) {
-        this.fechaActualizacion = fecha;
+    public void setImagenEtiqueta(Image image) {
+        this.imagenEtiqueta = image;
     }
 
     public LocalDateTime getFechaActualizacion() {
         return fechaActualizacion;
     }
 
+    public void setFechaActualizacion(LocalDateTime fecha) {
+        this.fechaActualizacion = fecha;
+    }
+
     /*------------------------- PARA CREAR NUEVO VINO -----------------------*/
     public Maridaje getMaridaje() {
         return maridaje;
+    }
+
+    public void setMaridaje(Maridaje maridaje) {
+        this.maridaje = maridaje;
     }
 
     public List<Varietal> getVariedades() {

@@ -15,7 +15,7 @@ import java.util.List;
 public class PantallaImportarActualizacion {
 
     @FXML
-    private GridPane gridBodegasActualizar;
+    private GridPane gridBodegasActualizar = new GridPane();
 
     @FXML
     private TableView<String> grillaBodegasActualizar = new TableView<>(); // Cambiado a TableView<String>
@@ -30,7 +30,7 @@ public class PantallaImportarActualizacion {
     private GridPane gridMostrarResumenVino;
 
     @FXML
-    private TableView<Object> grillaResumenesVino;
+    private TableView<Object> grillaResumenesVino = new TableView<>();
 
     private GestorImportarActualizacion gestorImportar;
     private List<String> listadoBodegasParaSeleccion;
@@ -71,7 +71,7 @@ public class PantallaImportarActualizacion {
         grillaBodegasActualizar.setItems(data);
     }
 
-    public void mostrarResumenVinos(List<Object> data) {
+    public void mostrarResumenVinos(List<String> data) {
         gridMostrarResumenVino.setVisible(true);
         ObservableList<Object> resumenData = FXCollections.observableArrayList(data);
         grillaResumenesVino.setItems(resumenData);

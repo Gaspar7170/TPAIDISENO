@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -9,62 +10,61 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 
-
-    <VBox xmlns="http://javafx.com/javafx"
-          xmlns:fx="http://javafx.com/fxml"
-          fx:controller="com.example.tpaidiseno.MainController"
-          prefHeight="500" prefWidth="500">
-
-        <GridPane fx:id="main" style="-fx-background-color: #EBCFCD;">
-            <columnConstraints>
-                <ColumnConstraints percentWidth="8" />
-                <ColumnConstraints percentWidth="92" />
-            </columnConstraints>
-            <rowConstraints>
-                <RowConstraints percentHeight="12.75" />
-                <RowConstraints percentHeight="87.25" />
-            </rowConstraints>
-
-            <!-- Background Image -->
-            <ImageView fx:id="wallPapper" GridPane.columnIndex="1" GridPane.rowSpan="2">
-                <image>
-                    <Image url="@/bonVinoWall.png"/>
-                </image>
-            </ImageView>
-
-            <!-- Show Grid -->
-            <GridPane fx:id="showGrid" GridPane.columnIndex="0" GridPane.rowSpan="1"/>
-
-            <!-- Home Button -->
-            <VBox alignment="TOP_CENTER" GridPane.rowIndex="1">
-                <Button fx:id="homeButton" onAction="#handleHomeButton"
-                        style="-fx-background-color: #D0AFEB;"
-                        prefWidth="50" prefHeight="50">
-                    <graphic>
-                        <ImageView fitHeight="50" fitWidth="50">
-                            <image>
-                                <Image url="@/home.png"/>
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
-
-                <Button fx:id="importButton" onAction="#handleImportarActualizacion"
-                        style="-fx-background-color: #D0AFEB;"
-                        prefWidth="50" prefHeight="50">
-                    <graphic>
-                        <ImageView fitHeight="50" fitWidth="50">
-                            <image>
-                                <Image url="@/cu5ICO.png"/>
-                            </image>
-                        </ImageView>
-                    </graphic>
-                </Button>
-                <!-- Other buttons similar structure -->
-            </VBox>
-
-        </GridPane>
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.tpaidiseno.MainController">
+   <children>
+   
+           <GridPane fx:id="main" style="-fx-background-color: #EBCFCD;">
+               <columnConstraints>
+                   <ColumnConstraints />
+                   <ColumnConstraints />
+               </columnConstraints>
+               <rowConstraints>
+                   <RowConstraints />
+                   <RowConstraints />
+               </rowConstraints>
+      <children>
+      
+                  <!-- Background Image -->
+                  <ImageView fx:id="wallPapper" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                      <image>
+                          <Image url="@/bonVinoWall.png" />
+                      </image>
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+                  </ImageView>
+      
+                  <!-- Show Grid -->
+                  <GridPane fx:id="showGrid" GridPane.columnIndex="1" />
+      
+                  <!-- Home Button -->
+                  <VBox alignment="TOP_CENTER">
+         <children>
+                         <Button fx:id="homeButton" onAction="#handleHomeButton" prefHeight="50" prefWidth="50" style="-fx-background-color: #D0AFEB;">
+                             <graphic>
+                                 <ImageView fitHeight="50" fitWidth="50">
+                                     <image>
+                                         <Image url="@/home.png" />
+                                     </image>
+                                 </ImageView>
+                             </graphic>
+                         </Button>
+         
+                         <Button fx:id="importButton" onAction="#handleImportarActualizacion" prefHeight="50" prefWidth="50" style="-fx-background-color: #D0AFEB;">
+                             <graphic>
+                                 <ImageView fitHeight="50" fitWidth="50">
+                                     <image>
+                                         <Image url="@/cu5ICO.png" />
+                                     </image>
+                                 </ImageView>
+                             </graphic>
+                         </Button>
+         </children>
+                      <!-- Other buttons similar structure -->
+                  </VBox>
+      </children>
+   
+           </GridPane>
+   </children>
 
     </VBox>
-
-

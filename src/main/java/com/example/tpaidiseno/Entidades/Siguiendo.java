@@ -1,12 +1,13 @@
 package com.example.tpaidiseno.Entidades;
 
 
-import java.time.LocalDateTime;
+import java.sql.Date;
 
 public class Siguiendo {
-    private LocalDateTime fechaInicio;
-    private LocalDateTime fechaFin;
+    private Date fechaInicio;
+    private Date fechaFin;
     private Bodega bodega;
+    private Enofilo amigo;
 
     /**
      * Constructor for Siguiendo class
@@ -15,10 +16,46 @@ public class Siguiendo {
      * @param fechaFin End date of following
      * @param bodega The bodega being followed
      */
-    public Siguiendo(LocalDateTime fechaInicio, LocalDateTime fechaFin, Bodega bodega) {
+    public Siguiendo(Date fechaInicio, Date fechaFin, Bodega bodega) {
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.bodega = bodega;
+    }
+
+    public Siguiendo() {
+
+    }
+
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public Date getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(Date fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public Bodega getBodega() {
+        return bodega;
+    }
+
+    public void setBodega(Bodega bodega) {
+        this.bodega = bodega;
+    }
+
+    public Enofilo getAmigo() {
+        return amigo;
+    }
+
+    public void setAmigo(Enofilo amigo) {
+        this.amigo = amigo;
     }
 
     /**
@@ -32,4 +69,6 @@ public class Siguiendo {
         if (bod == bodega) return true;
         else return false;
     }
+
+
 }

@@ -1,18 +1,26 @@
 package com.example.tpaidiseno.Gestores;
 
 
+import com.example.tpaidiseno.DAO.DAOBodega;
+import com.example.tpaidiseno.DAO.DAOEnofilo;
+import com.example.tpaidiseno.DAO.DAOVino;
 import com.example.tpaidiseno.Entidades.*;
+import com.example.tpaidiseno.Interfaces.IObserverNotificacionActualizacion;
+import com.example.tpaidiseno.Interfaces.ISujetoNotificacionActualizacion;
+import com.example.tpaidiseno.InterfazNotificacionPush;
 import com.example.tpaidiseno.PantallaImportarActualizacion;
+import javafx.scene.image.Image;
 //import BonVinoGrupo12.Modelo.*;
 
 import javax.swing.*;
+import java.awt.image.BufferedImage;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class GestorImportarActualizacion {
+public class GestorImportarActualizacion implements ISujetoNotificacionActualizacion {
 
     // Atributos
     private final PantallaImportarActualizacion pantalla;
@@ -28,6 +36,7 @@ public class GestorImportarActualizacion {
     private final List<Varietal> listadoVariedadesCompleto = new ArrayList<>();
     private final List<Enofilo> listadoEnofilosAplicacion = new ArrayList<>();
     private boolean activarAlternativo3 = false;
+    private List<IObserverNotificacionActualizacion> observers = new ArrayList<>();
 
     // Constructor
     public GestorImportarActualizacion(PantallaImportarActualizacion pan) {
@@ -115,8 +124,8 @@ public class GestorImportarActualizacion {
             resumenVinos.add(new String[]{
                     vinoActualizar.getBodega().getNombre(),
                     vinoActualizar.getNombre(),
-                    vinoActualizar.getNota(),
-                    String.valueOf(vinoActualizar.getPrecio()),
+                    vinoActualizar.getNotaDeCataBodega(),
+                    String.valueOf(vinoActualizar.getPrecioARS()),
                     vinoActualizar.getVariedades().get(0).getDescripcion(),
                     estado
             });
@@ -163,8 +172,8 @@ public class GestorImportarActualizacion {
                 vin.getFechaActualizacion(),
                 vin.getImagenEtiqueta(),
                 vin.getNombre(),
-                vin.getNota(),
-                vin.getPrecio(),
+                vin.getNotaDeCataBodega(),
+                vin.getPrecioARS(),
                 mar,
                 List.of(vari)
         );
@@ -188,10 +197,36 @@ public class GestorImportarActualizacion {
     }
 
     private void notificarActualizacionesDeVino(Enofilo notificacion) {
-        // Implementación futura con Observer (TP3)
+
     }
 
     private void crearListadoVinos() {
-        // Lógica para crear listado de vinos
+
+        List<Bodega> listadoBodegasCompleto = DAOBodega.getAll();
+
+        List<Vino> listadoVinosActualizarCompleto = DAOVino.getAll();
+
+        List<Enofilo> listadoEnofilosAplicacion = DAOEnofilo.getAll();
+    }
+
+
+    @Override
+    public void notificar(String nomBodega, String nomUsuario,Date fecha, Vino[] listadoVino) {
+        for (IObserverNotificacionActualizacion observador : observers){
+            observador.notificarActualizacionesDeVino(nomBodega,nomUsuario,fecha,listadoVino);
+        }
+
+    }
+
+    @Override
+    public void quitar(IObserverNotificacionActualizacion observador) {
+        observers.remove(observador);
+
+    }
+
+    @Override
+    public void subscribir(IObserverNotificacionActualizacion observador) {
+        observers.add(observador);
+
     }
 }

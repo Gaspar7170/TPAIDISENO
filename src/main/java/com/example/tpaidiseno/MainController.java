@@ -11,7 +11,7 @@ import java.io.InputStream;
 
 public class MainController {
     @FXML
-    private GridPane showGrid;
+    private GridPane showGrid = new GridPane();
 
     @FXML
     private Button homeButton;
@@ -42,7 +42,7 @@ public class MainController {
             profile.setFitWidth(100); // Ajusta el ancho
             profile.setFitHeight(100); // Ajusta la altura
             // Inicializar otras imágenes y componentes
-            showGrid.add(profile,1,1);
+            showGrid.add(profile,0,1);
         } catch (Exception e) {
             e.printStackTrace();
         }

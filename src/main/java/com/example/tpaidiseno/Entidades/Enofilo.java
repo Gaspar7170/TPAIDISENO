@@ -1,11 +1,13 @@
 package com.example.tpaidiseno.Entidades;
 
+import javafx.scene.image.Image;
+
 import java.awt.image.BufferedImage;
 import java.util.List;
 
 public class Enofilo {
     private String apellido;
-    private BufferedImage imagenPerfil;
+    private Image imagenPerfil;
     private String nombre;
     private List<Siguiendo> seguido; // Can be empty
     private Usuario usuario;
@@ -19,12 +21,16 @@ public class Enofilo {
      * @param seguido List of followed entities
      * @param usuario Associated user
      */
-    public Enofilo(String apellido, BufferedImage imagenPerfil, String nombre, List<Siguiendo> seguido, Usuario usuario) {
+    public Enofilo(String apellido, Image imagenPerfil, String nombre, List<Siguiendo> seguido, Usuario usuario) {
         this.apellido = apellido;
         this.imagenPerfil = imagenPerfil;
         this.nombre = nombre;
         this.seguido = seguido;
         this.usuario = usuario;
+    }
+
+    public Enofilo() {
+
     }
 
     /**
@@ -46,7 +52,45 @@ public class Enofilo {
      *
      * @return The username
      */
-    public String getNombreUsuario() {
-        return usuario.getNombre();
+
+
+    public String getApellido() {
+        return apellido;
+    }
+
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public Image getImagenPerfil() {
+        return imagenPerfil;
+    }
+
+    public void setImagenPerfil(Image imagenPerfil) {
+        this.imagenPerfil = imagenPerfil;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public List<Siguiendo> getSeguido() {
+        return seguido;
+    }
+
+    public void setSeguido(List<Siguiendo> seguido) {
+        this.seguido = seguido;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

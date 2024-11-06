@@ -6,6 +6,8 @@ public class Usuario {
     private String contrasenia;
     private boolean premium;
 
+
+
     // Default constructor
     public Usuario() { }
 
@@ -31,4 +33,25 @@ public class Usuario {
     public String getNombre() {
         return nombre;
     }
+
+    public void setNombre(String nombre){
+        this.nombre=nombre;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
+    public boolean isPremium() {
+        return premium;
+    }
+
+    public void setPremium(boolean premium) {
+        this.premium = premium;
+    }
+
 }

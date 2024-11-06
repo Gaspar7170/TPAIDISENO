@@ -28,9 +28,54 @@ public class Bodega {
         return hoy.isAfter(fechaUltimaActualizacion.plusMonths(periodoActualizacion));
     }
 
+    public String getCoordenadasUbicacion() {
+        return coordenadasUbicacion;
+    }
+
+    public void setCoordenadasUbicacion(String coordenadasUbicacion) {
+        this.coordenadasUbicacion = coordenadasUbicacion;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getHistoria() {
+        return historia;
+    }
+
+    public void setHistoria(String historia) {
+        this.historia = historia;
+    }
+
+    public LocalDateTime getFechaUltimaActualizacion() {
+        return fechaUltimaActualizacion;
+    }
+
+    public void setFechaUltimaActualizacion(LocalDateTime fechaUltimaActualizacion) {
+        this.fechaUltimaActualizacion = fechaUltimaActualizacion;
+    }
+
     public String getNombre() {
         return nombre;
     }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public int getPeriodoActualizacion() {
+        return periodoActualizacion;
+    }
+
+    public void setPeriodoActualizacion(int periodoActualizacion) {
+        this.periodoActualizacion = periodoActualizacion;
+    }
+
     // endregion
 
     // region Paso 5 y 6 del Caso de Uso
@@ -39,8 +84,8 @@ public class Bodega {
             if (vinoActualizado.equals(vinosBodega)) {
                 if (vinosBodega.sosVinoParaActualizar()) {
                     // Debemos crear todos los get porque sus atributos son privados
-                    vinosBodega.setPrecio(vinoActualizado.getPrecio());
-                    vinosBodega.setNotaCata(vinoActualizado.getNota());
+                    vinosBodega.setPrecioARS(vinoActualizado.getPrecioARS());
+                    vinosBodega.setNotaDeCataBodega(vinoActualizado.getNotaDeCataBodega());
                     vinosBodega.setImagenEtiqueta(vinoActualizado.getImagenEtiqueta());
                     // Esto lo dejamos porque sino no se actualizaria
                     LocalDateTime fechaActualizarNueva = LocalDateTime.now().plusMonths(periodoActualizacion);

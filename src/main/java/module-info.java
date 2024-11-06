@@ -11,6 +11,7 @@ module com.example.tpaidiseno {
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
     requires java.desktop;
+    requires java.sql;
 
     opens com.example.tpaidiseno to javafx.fxml;
    // opens com.example.tpaidiseno.Pantallas to javafx.fxml;
