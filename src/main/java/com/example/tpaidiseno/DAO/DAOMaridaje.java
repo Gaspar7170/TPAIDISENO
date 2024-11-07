@@ -44,7 +44,7 @@ public class DAOMaridaje {
             ps.setInt(1,id);
             ResultSet rs = ps.executeQuery();
 
-            if (rs.first()){
+            if (rs.next()){
 
 
                 maridaje.setNombre(rs.getString("nombre"));

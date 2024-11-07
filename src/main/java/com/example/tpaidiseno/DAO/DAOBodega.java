@@ -17,8 +17,7 @@ public class DAOBodega {
         String sql = "SELECT id, nombre, fecha_ultima_actualizacion, periodo FROM bodegas";
 
         try (Connection con = SQLiteConnection.connect();
-             PreparedStatement ps = con.prepareStatement(sql,
-                     ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+             PreparedStatement ps = con.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
@@ -44,7 +43,7 @@ public class DAOBodega {
             ps.setInt(1,id);
             ResultSet rs = ps.executeQuery();
 
-            if (rs.first()){
+            if (rs.next()){
 
                 bodega.setNombre(rs.getString("nombre"));
 

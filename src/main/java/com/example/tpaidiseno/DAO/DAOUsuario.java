@@ -43,7 +43,7 @@ public class DAOUsuario {
             ps.setInt(1,id);
             ResultSet rs = ps.executeQuery();
 
-            if (rs.first()){
+            if (rs.next()){
 
                 usuario.setNombre(rs.getString("nombre"));
                 usuario.setContrasenia(rs.getString("contraseña"));

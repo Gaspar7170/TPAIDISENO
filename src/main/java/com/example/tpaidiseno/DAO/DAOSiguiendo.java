@@ -4,10 +4,7 @@ import com.example.tpaidiseno.Entidades.Siguiendo;
 import com.example.tpaidiseno.Entidades.Usuario;
 import com.example.tpaidiseno.SQLiteConnection;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,17 +35,17 @@ public class DAOSiguiendo {
 
     public static Siguiendo getById(int id){
         Connection con = SQLiteConnection.connect();
-        String sql = "SELECT id,fecha_inicio,fecha_fin,bodega_id FROM usuarios WHERE id = ?";
+        String sql = "SELECT id,fecha_inicio,fecha_fin,bodega_id FROM seguimientos WHERE id = ?";
         Siguiendo seguimiento = new Siguiendo();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1,id);
             ResultSet rs = ps.executeQuery();
 
-            if (rs.first()){
+            if (rs.next()){
 
-                seguimiento.setFechaInicio(rs.getDate("fecha_inicio"));
-                seguimiento.setFechaFin(rs.getDate("fecha_fin"));
+                seguimiento.setFechaInicio(Date.valueOf(rs.getString("fecha_inicio")));
+                seguimiento.setFechaFin(Date.valueOf(rs.getString("fecha_fin")));
                 seguimiento.setBodega(DAOBodega.getById(rs.getInt("bodega_id")));
 
             }
@@ -60,24 +57,23 @@ public class DAOSiguiendo {
     }
 
     public static List<Siguiendo> getAllOfEnofilo(int id) {
-
         Connection con = SQLiteConnection.connect();
-        String sql = "SELECT enofilo_id,seguimiento_id FROM enofilos_x_seguimiento WHERE id = ? ";
+        String sql = "SELECT enofilo_id, seguimiento_id FROM enofilos_x_seguimiento WHERE enofilo_id = ?";
         List<Siguiendo> seguimientos = new ArrayList<>();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1,id);
+            ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
 
-            while (rs.next()){
+            while (rs.next()) {
                 Siguiendo seguimiento = getById(rs.getInt("seguimiento_id"));
-
                 seguimientos.add(seguimiento);
             }
 
-        }catch (SQLException eSql){
+        } catch (SQLException eSql) {
             eSql.printStackTrace();
         }
         return seguimientos;
     }
+
 }
