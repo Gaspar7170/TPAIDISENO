@@ -1,9 +1,7 @@
 package com.example.tpaidiseno.Gestores;
 
 
-import com.example.tpaidiseno.DAO.DAOBodega;
-import com.example.tpaidiseno.DAO.DAOEnofilo;
-import com.example.tpaidiseno.DAO.DAOVino;
+import com.example.tpaidiseno.DAO.*;
 import com.example.tpaidiseno.Entidades.*;
 import com.example.tpaidiseno.Interfaces.IObserverNotificacionActualizacion;
 import com.example.tpaidiseno.Interfaces.ISujetoNotificacionActualizacion;
@@ -131,7 +129,7 @@ public class GestorImportarActualizacion implements ISujetoNotificacionActualiza
                     vinoActualizar.getNombre(),
                     vinoActualizar.getNotaDeCataBodega(),
                     String.valueOf(vinoActualizar.getPrecioARS()),
-                    vinoActualizar.getVarietales().get(0).getDescripcion(),
+                    //vinoActualizar.getVarietales().get(0).getDescripcion(),
                     estado
             });
         }
@@ -147,7 +145,11 @@ public class GestorImportarActualizacion implements ISujetoNotificacionActualiza
     }
 
     private void crearVinoNuevo(Vino vinoACrear) {
-       DAOVino.insertarVinoNvo(vinoACrear);
+        int ultimo = DAOVino.getLast();
+        DAOVarietal.insertarVarietaje(ultimo,vinoACrear.getVarietales());
+        DAOMaridaje.insertarMaridaje(ultimo,vinoACrear.getMaridaje());
+        DAOVino.insertarVinoNvo(vinoACrear);
+
 
     }
 

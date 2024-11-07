@@ -66,12 +66,13 @@ public class DAOVarietal {
 
     public static List<Varietal> getVarietalesXVino(int id) {
         Connection con = SQLiteConnection.connect();
-        String sql = "SELECT varietal_id FROM varietales_x_vino WHERE vino_id = ? ";
+        String sql = "SELECT varietal_id, vino_id FROM varietales_x_vino WHERE vino_id = ?";
         List<Varietal> varietales = new ArrayList<>();
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
+            ps.setInt(1,id);
 
             while (rs.next()){
                 Varietal varietal = getById(rs.getInt("varietal_id"));

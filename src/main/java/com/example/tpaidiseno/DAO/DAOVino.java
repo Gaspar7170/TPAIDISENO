@@ -15,7 +15,7 @@ public class DAOVino {
 
     public static List<Vino> getAll(){
         Connection con = SQLiteConnection.connect();
-        String sql = "SELECT id,bodega_id,anio,fecha_actualizacion,comentarios,nombre,descripcion,precio,maridaje_id FROM vinos ";
+        String sql = "SELECT id,bodega_id,anio,fecha_actualizacion,nombre,descripcion,precio FROM vinos ";
         List<Vino> vinos = new ArrayList<>();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -23,13 +23,14 @@ public class DAOVino {
 
             while (rs.next()){
                 Vino vino = new Vino();
+                System.out.println(rs.getInt("id"));
                 vino.setId(rs.getInt("id"));
                 vino.setBodega(DAOBodega.getById(rs.getInt("bodega_id")));
                 vino.setAniada(rs.getInt("anio"));
                 vino.setNombre(rs.getString("nombre"));
                 vino.setNotaDeCataBodega(rs.getString("descripcion"));
                 vino.setPrecioARS(rs.getDouble("precio"));
-                vino.setMaridaje(DAOMaridaje.getMaridajeXVino(rs.getInt("maridaje_id")));
+                vino.setMaridaje(DAOMaridaje.getMaridajeXVino(rs.getInt("id")));
                 vino.setFechaActualizacion(LocalDate.parse(rs.getString("fecha_actualizacion")));
                 vino.setVarietales(DAOVarietal.getVarietalesXVino(rs.getInt("id")));
 
@@ -74,7 +75,7 @@ public class DAOVino {
 
     public static void insertarVinoNvo(Vino vinoACrear) {
         Connection con = SQLiteConnection.connect();
-        String sql = "INSERT INTO vinos bodega_id,anio,fecha_actualizacion,nombre,descripcion,precio VALUES(?,?,?,?,?,?)";
+        String sql = "INSERT INTO vinos (bodega_id,anio,fecha_actualizacion,nombre,descripcion,precio) VALUES(?,?,?,?,?,?)";
         try{
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1,vinoACrear.getBodega().getId());
@@ -85,22 +86,14 @@ public class DAOVino {
             ps.setString(5, vinoACrear.getNotaDeCataBodega());
             ps.setDouble(6,vinoACrear.getPrecioARS());
             ps.executeUpdate();
-            int ultimo = DAOVino.getLast();
-            DAOVarietal.insertarVarietaje(ultimo,vinoACrear.getVarietales());
-            DAOMaridaje.insertarMaridaje(ultimo,vinoACrear.getMaridaje());
+
 
         }catch (SQLException eSql){
             eSql.printStackTrace();
         }
-
-        //Clases varietal id 1
-        vinoACrear.getVarietales();
-        //Clases Maridaje id 1
-        vinoACrear.getMaridaje();
-
     }
 
-    private static int getLast() {
+    public static int getLast() {
         Connection con = SQLiteConnection.connect();
         String sql = "SELECT seq FROM sqlite_sequence WHERE name = 'vinos' ";
         int ultimo = 0;

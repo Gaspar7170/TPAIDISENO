@@ -69,25 +69,34 @@ public class PantallaImportarActualizacion {
             showErrorMessage("ERROR: No se seleccionó ninguna bodega");
         }
     }
+
+
      */
+
+    public void mostrarBodegasParaActualizar(List<Bodega> bodegasActualizar) {
+        listadoBodegasParaSeleccion = bodegasActualizar;
+
+        // Convierte cada Bodega a su nombre (o algún otro atributo de tipo String)
+        ObservableList<String> data = FXCollections.observableArrayList();
+        for (Bodega bodega : bodegasActualizar) {
+            data.add(bodega.getNombre()); // Usa el método adecuado para obtener el nombre
+        }
+        grillaBodegasActualizar.setItems(data);
+    }
+
     public void selOpTomarSeleccionBodega() {
         grillaResumenesVino.setItems(null);
 
-        String nombre = grillaBodegasActualizar.getSelectionModel().getSelectedItem();
-        if (nombre != null) {
-            bodegaSeleccionadaTextbox.setText(nombre);
-            gestorImportar.tomarSeleccionBodega(nombre);
+        int index = grillaBodegasActualizar.getSelectionModel().getSelectedIndex();
+        if (index != -1) {
+            Bodega bodegaSeleccionada = listadoBodegasParaSeleccion.get(index);
+            bodegaSeleccionadaTextbox.setText(bodegaSeleccionada.getNombre());
+            gestorImportar.tomarSeleccionBodega(bodegaSeleccionada);
         } else {
             showErrorMessage("ERROR: No se seleccionó ninguna bodega");
         }
     }
 
-
-    public void mostrarBodegasParaActualizar(List<Bodega> bodegasActualizar) {
-        listadoBodegasParaSeleccion = bodegasActualizar;
-        ObservableList<String> data = FXCollections.observableArrayList(listadoBodegasParaSeleccion);
-        grillaBodegasActualizar.setItems(data);
-    }
 
 
 

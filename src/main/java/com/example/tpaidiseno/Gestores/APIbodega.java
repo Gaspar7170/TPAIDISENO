@@ -21,8 +21,8 @@ public class APIbodega {
         vino1.setAniada(2019);
         vino1.setPrecioARS(2000);
         vino1.setNotaDeCataBodega("Muy Rico");
-        vino1.setMaridaje(DAOMaridaje.getMaridajeXVino(1));
-        vino1.setVarietales(DAOVarietal.getVarietalesXVino(1));
+        vino1.setMaridaje(DAOMaridaje.getMaridajeXVino(12));
+        vino1.setVarietales(DAOVarietal.getVarietalesXVino(5));
         vino1.setNombre("Santa Ana");
         Vino vino2 = new Vino();
         vino2.setBodega(DAOBodega.getById(2));

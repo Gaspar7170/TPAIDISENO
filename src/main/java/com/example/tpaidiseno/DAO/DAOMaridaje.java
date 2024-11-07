@@ -62,12 +62,13 @@ public class DAOMaridaje {
 
     public static List<Maridaje> getMaridajeXVino(int id) {
         Connection con = SQLiteConnection.connect();
-        String sql = "SELECT maridaje_id FROM varietales_x_vino WHERE vino_id = ? ";
+        String sql = "SELECT maridaje_id, vino_id FROM maridajes_x_vino WHERE vino_id = ? ";
         List<Maridaje> maridajes = new ArrayList<>();
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
+            ps.setInt(1,id);
 
             while (rs.next()){
                 Maridaje maridaje = getById(rs.getInt("maridaje_id"));
