@@ -67,22 +67,11 @@ public class GestorImportarActualizacion implements ISujetoNotificacionActualiza
     // Paso 4 del Caso de Uso
     public void tomarSeleccionBodega(Bodega bodegaSeleccionada) {
         BodegaSeleccionada = bodegaSeleccionada;
-        obtenerActualizacionVinosBodega(bodegaSeleccionada);
+        obtenerActualizacionVinosBodega();
     }
 
-    private void obtenerActualizacionVinosBodega(Bodega bodega) {
+    private void obtenerActualizacionVinosBodega() {
         listadoVinosActualizarBodega = APIbodega.obtenerActualizacionVinos();
-
-
-
-    //    listadoVinosActualizarBodega = listado
-
-        /*BodegaSeleccionada = listadoParaActualizar.stream()
-                .filter(b -> b.getNombre().equals(nombre))
-                .findFirst()
-                .orElse(new Bodega());*/
-
-
 
         if (listadoVinosActualizarBodega != null) actualizarOCrearVinos();
     }
@@ -109,8 +98,8 @@ public class GestorImportarActualizacion implements ISujetoNotificacionActualiza
 
     // Paso 5 y 6 del Caso de Uso
     private void actualizarOCrearVinos() {
-        List<Object> resumenVinos = new ArrayList<>();
-
+        List<String> resumenVinos = new ArrayList<>();
+        StringBuilder sb = new StringBuilder();
         for (Vino vinoActualizar : listadoVinosActualizarBodega) {
 
             String estado ;
@@ -124,14 +113,14 @@ public class GestorImportarActualizacion implements ISujetoNotificacionActualiza
                 estado = "CREADO";
             }
 
-            resumenVinos.add(new String[]{
-                    vinoActualizar.getBodega().getNombre(),
-                    vinoActualizar.getNombre(),
-                    vinoActualizar.getNotaDeCataBodega(),
-                    String.valueOf(vinoActualizar.getPrecioARS()),
-                    //vinoActualizar.getVarietales().get(0).getDescripcion(),
-                    estado
-            });
+            sb.append(vinoActualizar.getBodega().getNombre());
+            sb.append(vinoActualizar.getNombre());
+            sb.append(vinoActualizar.getNotaDeCataBodega());
+            sb.append(vinoActualizar.getPrecioARS());
+            sb.append(vinoActualizar.getVarietales());
+            sb.append(estado);
+            System.out.println(sb.toString());
+            resumenVinos.add(sb.toString());
         }
 
         BodegaSeleccionada.setUltimaActualizacion(getFechaActual());
@@ -145,9 +134,7 @@ public class GestorImportarActualizacion implements ISujetoNotificacionActualiza
     }
 
     private void crearVinoNuevo(Vino vinoACrear) {
-        int ultimo = DAOVino.getLast();
-        DAOVarietal.insertarVarietaje(ultimo,vinoACrear.getVarietales());
-        DAOMaridaje.insertarMaridaje(ultimo,vinoACrear.getMaridaje());
+
         DAOVino.insertarVinoNvo(vinoACrear);
 
 

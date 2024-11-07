@@ -101,7 +101,7 @@ public class PantallaImportarActualizacion {
 
 
 
-    public void mostrarResumenVinos(List<Object> data) {
+    public void mostrarResumenVinos(List<String> data) {
         gridMostrarResumenVino.setVisible(true);
         ObservableList<Object> resumenData = FXCollections.observableArrayList(data);
         grillaResumenesVino.setItems(resumenData);

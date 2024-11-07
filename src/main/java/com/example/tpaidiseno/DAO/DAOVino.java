@@ -81,6 +81,9 @@ public class DAOVino {
             ps.setString(5, vinoACrear.getNotaDeCataBodega());
             ps.setDouble(6, vinoACrear.getPrecioARS());
             ps.executeUpdate();
+            int ultimo  = getLast();
+            DAOVarietal.insertarVarietaje(ultimo,vinoACrear.getVarietales());
+            DAOMaridaje.insertarMaridaje(ultimo,vinoACrear.getMaridaje());
 
         } catch (SQLException eSql) {
             eSql.printStackTrace();

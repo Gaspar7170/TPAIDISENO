@@ -24,6 +24,7 @@ public class APIbodega {
         vino1.setMaridaje(DAOMaridaje.getMaridajeXVino(12));
         vino1.setVarietales(DAOVarietal.getVarietalesXVino(5));
         vino1.setNombre("Santa Ana");
+
         Vino vino2 = new Vino();
         vino2.setBodega(DAOBodega.getById(2));
         vino2.setFechaActualizacion(LocalDate.now());
@@ -33,8 +34,10 @@ public class APIbodega {
         vino2.setNotaDeCataBodega("Horrible");
         vino2.setMaridaje(DAOMaridaje.getMaridajeXVino(2));
         vino2.setVarietales(DAOVarietal.getVarietalesXVino(2));
+
         vinos.add(vino1);
         vinos.add(vino2);
+
         return vinos;
 
     }
