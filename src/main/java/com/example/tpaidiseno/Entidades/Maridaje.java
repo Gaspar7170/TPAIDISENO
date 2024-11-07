@@ -2,8 +2,9 @@ package com.example.tpaidiseno.Entidades;
 
 
 public class Maridaje {
-    public String nombre;
-    public String descripcion;
+    private int id;
+    private String nombre;
+    private String descripcion;
 
     // Default constructor
     public Maridaje() {
@@ -17,6 +18,14 @@ public class Maridaje {
 
     public String getNombre() {
         return nombre;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setNombre(String nombre) {
@@ -41,5 +50,12 @@ public class Maridaje {
     public boolean esMaridaje(Maridaje mar) {
         if (mar == this) return true;
         else return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Maridaje{" +
+                "nombre='" + nombre + '\'' +
+                '}';
     }
 }

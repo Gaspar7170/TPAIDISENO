@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Bodega {
+    private int id;
     private String coordenadasUbicacion;
     private String descripcion;
     private String historia;
@@ -37,6 +38,14 @@ public class Bodega {
 
     public void setCoordenadasUbicacion(String coordenadasUbicacion) {
         this.coordenadasUbicacion = coordenadasUbicacion;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDescripcion() {
@@ -81,11 +90,7 @@ public class Bodega {
 
     @Override
     public String toString() {
-        return "Bodega{" +
-                ", nombre='" + nombre + '\'' +
-                ", fechaUltimaActualizacion=" + fechaUltimaActualizacion +
-                ", periodoActualizacion=" + periodoActualizacion +
-                "\n}";
+        return nombre;
     }
 
     // endregion

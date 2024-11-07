@@ -2,6 +2,7 @@ package com.example.tpaidiseno.Entidades;
 
 
 public class TipoUva {
+    private  int id;
     private String descripcion;
     private String nombre;
 
@@ -15,6 +16,13 @@ public class TipoUva {
         this.nombre = nombre;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getDescripcion() {
         return descripcion;
@@ -42,5 +50,12 @@ public class TipoUva {
     public boolean esTipoUva(TipoUva tipo) {
         if (tipo == this) return true;
         else return false;
+    }
+
+    @Override
+    public String toString() {
+        return "TipoUva{" +
+                "nombre='" + nombre + '\'' +
+                '}';
     }
 }

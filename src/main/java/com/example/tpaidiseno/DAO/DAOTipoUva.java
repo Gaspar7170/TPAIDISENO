@@ -23,6 +23,7 @@ public class DAOTipoUva {
 
             while (rs.next()){
                 TipoUva tipoUva = new TipoUva();
+                tipoUva.setId(rs.getInt("id"));
                 tipoUva.setNombre(rs.getString("nombre"));
                 tipoUva.setDescripcion(rs.getString("descripcion"));
                 tiposUvas.add(tipoUva);
@@ -44,7 +45,7 @@ public class DAOTipoUva {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()){
-
+                tipoUva.setId(rs.getInt("id"));
                 tipoUva.setNombre(rs.getString("nombre"));
                 tipoUva.setDescripcion(rs.getString("descripcion"));
             }

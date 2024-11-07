@@ -21,10 +21,10 @@ public class GestorImportarActualizacion implements ISujetoNotificacionActualiza
     // Atributos
     private final PantallaImportarActualizacion pantalla;
     private List<Bodega> listadoBodegasCompleto = new ArrayList<>();
-    private final List<String> nombresBodegaActualizar = new ArrayList<>();
+    private final List<Bodega> bodegasActualizar = new ArrayList<>();
     private final List<Bodega> listadoParaActualizar = new ArrayList<>();
     private List<Vino> listadoVinosActualizarCompleto = new ArrayList<>();
-    private List<Vino> listadoVinosActualizarBodega = new ArrayList<>();
+    private List<Vino>  listadoVinosActualizarBodega ;
     private Bodega BodegaSeleccionada;
     private final Map<Bodega, List<Vino>> bodegasXvino = new HashMap<>();
     private final List<Maridaje> listadoMaridajeCompleto = new ArrayList<>();
@@ -49,17 +49,17 @@ public class GestorImportarActualizacion implements ISujetoNotificacionActualiza
     private void buscarBodegasParaActualizar() {
         LocalDate fechaHoy = getFechaActual();
         listadoParaActualizar.clear();
-        nombresBodegaActualizar.clear();
+        bodegasActualizar.clear();
 
 
 
         for (Bodega bod : listadoBodegasCompleto) {
             if (bod.estaEnPeriodoDeActualizacion(fechaHoy)) {
-                nombresBodegaActualizar.add(bod.getNombre());
+                bodegasActualizar.add(bod);
                 listadoParaActualizar.add(bod);
             }
         }
-        pantalla.mostrarBodegasParaActualizar(nombresBodegaActualizar);
+        pantalla.mostrarBodegasParaActualizar(bodegasActualizar);
     }
 
     private LocalDate getFechaActual() {
@@ -67,21 +67,26 @@ public class GestorImportarActualizacion implements ISujetoNotificacionActualiza
     }
 
     // Paso 4 del Caso de Uso
-    public void tomarSeleccionBodega(String nombre) {
-        obtenerActualizacionVinosBodega(nombre);
+    public void tomarSeleccionBodega(Bodega bodegaSeleccionada) {
+        BodegaSeleccionada = bodegaSeleccionada;
+        obtenerActualizacionVinosBodega(bodegaSeleccionada);
     }
 
-    private void obtenerActualizacionVinosBodega(String nombre) {
-        listadoVinosActualizarBodega = obtenerActualizacionVinos(nombre);
+    private void obtenerActualizacionVinosBodega(Bodega bodega) {
+        listadoVinosActualizarBodega = APIbodega.obtenerActualizacionVinos();
 
-        BodegaSeleccionada = listadoParaActualizar.stream()
+
+
+    //    listadoVinosActualizarBodega = listado
+
+        /*BodegaSeleccionada = listadoParaActualizar.stream()
                 .filter(b -> b.getNombre().equals(nombre))
                 .findFirst()
-                .orElse(new Bodega());
+                .orElse(new Bodega());*/
 
-        if (BodegaSeleccionada.getNombre() == null) return;
 
-        if (!listadoVinosActualizarBodega.isEmpty()) actualizarOCrearVinos();
+
+        if (listadoVinosActualizarBodega != null) actualizarOCrearVinos();
     }
 
     private List<Vino> obtenerActualizacionVinos(String nombre) {
@@ -109,14 +114,16 @@ public class GestorImportarActualizacion implements ISujetoNotificacionActualiza
         List<Object> resumenVinos = new ArrayList<>();
 
         for (Vino vinoActualizar : listadoVinosActualizarBodega) {
-            boolean alternativa = existeEsteVino(vinoActualizar);
 
-            String estado = alternativa ? "ACTUALIZADO" : "CREADO";
+            String estado ;
 
-            if (alternativa) {
+            if (existeEsteVino(vinoActualizar)) {
                 actualizarCaracteristicaVinoExistente(vinoActualizar);
+                estado = "ACTUALIZADO";
+
             } else {
                 crearVinoNuevo(vinoActualizar);
+                estado = "CREADO";
             }
 
             resumenVinos.add(new String[]{
@@ -124,7 +131,7 @@ public class GestorImportarActualizacion implements ISujetoNotificacionActualiza
                     vinoActualizar.getNombre(),
                     vinoActualizar.getNotaDeCataBodega(),
                     String.valueOf(vinoActualizar.getPrecioARS()),
-                    vinoActualizar.getVariedades().get(0).getDescripcion(),
+                    vinoActualizar.getVarietales().get(0).getDescripcion(),
                     estado
             });
         }
@@ -140,48 +147,12 @@ public class GestorImportarActualizacion implements ISujetoNotificacionActualiza
     }
 
     private void crearVinoNuevo(Vino vinoACrear) {
-        Maridaje maridajeActual = buscarMaridaje(vinoACrear.getMaridaje());
-        TipoUva tipoUva = buscarTipoUva(vinoACrear.getVariedades().get(0).getTipoUva());
+       DAOVino.insertarVinoNvo(vinoACrear);
 
-        if (maridajeActual != null && tipoUva != null) CrearVino(vinoACrear, tipoUva, maridajeActual);
     }
 
-    private Maridaje buscarMaridaje(Maridaje maridajeBuscar) {
-        return listadoMaridajeCompleto.stream()
-                .filter(m -> m.esMaridaje(maridajeBuscar))
-                .findFirst()
-                .orElse(null);
-    }
 
-    private TipoUva buscarTipoUva(TipoUva tipoUva) {
-        return listadoTipoUvaCompleto.stream()
-                .filter(u -> u.esTipoUva(tipoUva))
-                .findFirst()
-                .orElse(null);
-    }
 
-    private Vino CrearVino(Vino vin, TipoUva tip, Maridaje mar) {
-        Varietal vari = vin.getVariedades().get(0);
-        vari.setTipoUva(tip);
-
-        Vino vinoNuevo = new Vino(
-                BodegaSeleccionada,
-                vin.getAnianada(),
-                vin.getFechaActualizacion(),
-                vin.getImagenEtiqueta(),
-                vin.getNombre(),
-                vin.getNotaDeCataBodega(),
-                vin.getPrecioARS(),
-                mar,
-                List.of(vari)
-        );
-
-        List<Vino> listadoVinosXBodega = bodegasXvino.getOrDefault(vinoNuevo.getBodega(), new ArrayList<>());
-        listadoVinosXBodega.add(vinoNuevo);
-        bodegasXvino.put(vinoNuevo.getBodega(), listadoVinosXBodega);
-
-        return vinoNuevo;
-    }
 
     // Paso 7 del Caso de Uso
     private void buscarSeguidoresBodega() {

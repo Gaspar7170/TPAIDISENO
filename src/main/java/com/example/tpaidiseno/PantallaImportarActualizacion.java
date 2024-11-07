@@ -1,5 +1,6 @@
 package com.example.tpaidiseno;
 
+import com.example.tpaidiseno.Entidades.Bodega;
 import com.example.tpaidiseno.Gestores.GestorImportarActualizacion;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -37,7 +38,7 @@ public class PantallaImportarActualizacion {
     private TableView<Object> grillaResumenesVino = new TableView<>();
 
     private GestorImportarActualizacion gestorImportar;
-    private List<String> listadoBodegasParaSeleccion;
+    private List<Bodega> listadoBodegasParaSeleccion;
 
     @FXML
     private void initialize() {
@@ -82,7 +83,7 @@ public class PantallaImportarActualizacion {
     }
 
 
-    public void mostrarBodegasParaActualizar(List<String> bodegasActualizar) {
+    public void mostrarBodegasParaActualizar(List<Bodega> bodegasActualizar) {
         listadoBodegasParaSeleccion = bodegasActualizar;
         ObservableList<String> data = FXCollections.observableArrayList(listadoBodegasParaSeleccion);
         grillaBodegasActualizar.setItems(data);

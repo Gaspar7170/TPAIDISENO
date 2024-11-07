@@ -1,6 +1,7 @@
 package com.example.tpaidiseno.Entidades;
 
 
+import com.example.tpaidiseno.DAO.DAOBodega;
 import javafx.scene.image.Image;
 
 import java.time.LocalDate;
@@ -9,6 +10,7 @@ import java.time.chrono.ChronoLocalDateTime;
 import java.util.List;
 
 public class Vino {
+    private int id;
     // Es aniada es por no utilizar ñ en un atributo
     private Bodega bodega;
     private int aniada;
@@ -18,15 +20,16 @@ public class Vino {
     private String nombre;
     private String notaDeCataBodega;
     private double precioARS;
-    private Maridaje maridaje;
-    private List<Varietal> variedades;
+    private List<Maridaje> maridajes;
+    private List<Varietal> varietales;
 
     public Vino() {
     }
 
+
     public Vino(Bodega bodega, int aniada, LocalDate fechaActualizacion,
                 Image imagenEtiqueta, String nombre, String notaDeCataBodega,
-                double precioARS, Maridaje maridaje, List<Varietal> variedades) {
+                double precioARS, List<Maridaje> maridajes, List<Varietal> varietales) {
         this.bodega = bodega;
         this.aniada = aniada;
         this.fechaActualizacion = fechaActualizacion;
@@ -34,13 +37,21 @@ public class Vino {
         this.nombre = nombre;
         this.notaDeCataBodega = notaDeCataBodega;
         this.precioARS = precioARS;
-        this.maridaje = maridaje;
-        this.variedades = variedades;
+        this.maridajes = maridajes;
+        this.varietales = varietales;
     }
 
     // region Paso 6 del Caso de Uso
     public boolean sosVinoParaActualizar() {
         return LocalDateTime.now().isAfter(ChronoLocalDateTime.from(fechaActualizacion));
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public Bodega getBodega() {
@@ -84,8 +95,8 @@ public class Vino {
         this.precioARS = precioARS;
     }
 
-    public void setVariedades(List<Varietal> variedades) {
-        this.variedades = variedades;
+    public void setVarietales(List<Varietal> varietales) {
+        this.varietales = varietales;
     }
 
     public Image getImagenEtiqueta() {
@@ -105,16 +116,16 @@ public class Vino {
     }
 
     /*------------------------- PARA CREAR NUEVO VINO -----------------------*/
-    public Maridaje getMaridaje() {
-        return maridaje;
+    public List<Maridaje> getMaridaje() {
+        return maridajes;
     }
 
-    public void setMaridaje(Maridaje maridaje) {
-        this.maridaje = maridaje;
+    public void setMaridaje( List<Maridaje> maridajes) {
+        this.maridajes = maridajes;
     }
 
-    public List<Varietal> getVariedades() {
-        return variedades;
+    public List<Varietal> getVarietales() {
+        return varietales;
     }
 
     public int getAnianada() {
@@ -130,7 +141,8 @@ public class Vino {
                 ", nombre='" + nombre + '\'' +
                 ", notaDeCataBodega='" + notaDeCataBodega + '\'' +
                 ", precioARS=" + precioARS +
-                ", maridaje=" + maridaje +
+                ", maridajes=" + maridajes +
+                ", varietales=" + varietales +
                 "\n}";
     }
 }

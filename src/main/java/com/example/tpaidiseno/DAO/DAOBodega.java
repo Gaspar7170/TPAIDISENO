@@ -24,6 +24,7 @@ public class DAOBodega {
 
             while (rs.next()) {
                 Bodega bodega = new Bodega();
+                bodega.setId(rs.getInt("id"));
                 bodega.setNombre(rs.getString("nombre"));
                 bodega.setUltimaActualizacion(LocalDate.parse(rs.getString("fecha_ultima_actualizacion")));
                 bodega.setPeriodoActualizacion(rs.getInt("periodo"));
@@ -48,7 +49,7 @@ public class DAOBodega {
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()){
-
+                bodega.setId(rs.getInt("id"));
                 bodega.setNombre(rs.getString("nombre"));
                 bodega.setUltimaActualizacion(LocalDate.parse(rs.getString("fecha_ultima_actualizacion")));
                 bodega.setPeriodoActualizacion(rs.getInt("periodo"));
