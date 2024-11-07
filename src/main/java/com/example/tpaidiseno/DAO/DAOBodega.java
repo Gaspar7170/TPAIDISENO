@@ -67,13 +67,14 @@ public class DAOBodega {
 
     public static void actualizarFechaActualizacion(Bodega bodegaSeleccionada) {
 
-        String sql = "UPDATE bodegas SET fecha_ultima_actualizacion = ?";
+        String sql = "UPDATE bodegas SET fecha_ultima_actualizacion = ? WHERE id = ?";
         Bodega bodega = new Bodega();
 
         try (Connection con = SQLiteConnection.connect();
              PreparedStatement ps = con.prepareStatement(sql)) {
 
             ps.setString(1, bodegaSeleccionada.getFechaUltimaActualizacion().toString());
+            ps.setInt(2, bodegaSeleccionada.getId());
 
             ps.executeUpdate();
 

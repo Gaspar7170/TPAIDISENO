@@ -143,7 +143,7 @@ public class GestorImportarActualizacion implements ISujetoNotificacionActualiza
     }
 
     private void actualizarCaracteristicaVinoExistente(Vino vinoActualizar) {
-        List<Vino> listadoVinosXBodega = hashVinosXBodega.get(vinoActualizar.getBodega());
+        List<Vino> listadoVinosXBodega = hashVinosXBodega.get(bodegaSeleccionada);
         bodegaSeleccionada.actualizarDatosVinos(listadoVinosXBodega, vinoActualizar);
         DAOVino.actualizarVino(vinoActualizar);
 
@@ -164,7 +164,7 @@ public class GestorImportarActualizacion implements ISujetoNotificacionActualiza
             subscribir(new InterfazNotificacionPush(e.getUsuario()));
         }
 
-        notificar(bodegaSeleccionada.getNombre(),getFechaActual(), hashVinosActualizadoXBodega.get(bodegaSeleccionada));
+        notificar(bodegaSeleccionada.getNombre(),getFechaActual(), (ArrayList<Vino>) hashVinosActualizadoXBodega.get(bodegaSeleccionada));
 
         JOptionPane.showMessageDialog(null, "ÉXITO: los mensajes fueron enviados correctamente", "ÉXITO", JOptionPane.INFORMATION_MESSAGE);
     }
@@ -174,7 +174,7 @@ public class GestorImportarActualizacion implements ISujetoNotificacionActualiza
 
 
     @Override
-    public void notificar(String nomBodega, Date fecha, ArrayList<Vino> listadoVino) {
+    public void notificar(String nomBodega, LocalDate fecha, ArrayList<Vino> listadoVino) {
         for (IObserverNotificacionActualizacion observador : observers) {
             observador.notificarActualizacionesDeVino(nomBodega, fecha, listadoVino);
         }
