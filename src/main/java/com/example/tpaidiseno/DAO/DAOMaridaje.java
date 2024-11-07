@@ -85,7 +85,7 @@ public class DAOMaridaje {
 
     public static void insertarMaridaje(int last,List<Maridaje> maridajes) {
         Connection con = SQLiteConnection.connect();
-        String sql = "INSERT INTO maridajes_x_vino vino_id,maridaje_id VALUES(?,?)";
+        String sql = "INSERT INTO maridajes_x_vino (vino_id,maridaje_id) VALUES(?,?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
 

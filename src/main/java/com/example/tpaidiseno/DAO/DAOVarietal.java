@@ -87,21 +87,21 @@ public class DAOVarietal {
         return  varietales;
     }
 
-    public static void insertarVarietaje(int last,List<Varietal> varietales) {
+    public static void insertarVarietaje(int last, List<Varietal> varietales) {
         Connection con = SQLiteConnection.connect();
-        String sql = "INSERT INTO varietales_x_vino vino_id,varietal_id VALUES(?,?)";
+        String sql = "INSERT INTO varietales_x_vino (vino_id, varietal_id) VALUES (?, ?)";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
 
-            for(Varietal v : varietales){
-                ps.setInt(1,last);
-                ps.setInt(2,v.getId());
+            for (Varietal v : varietales) {
+                ps.setInt(1, last);
+                ps.setInt(2, v.getId());
                 ps.executeUpdate();
             }
 
-        }catch (SQLException eSql){
+        } catch (SQLException eSql) {
             eSql.printStackTrace();
         }
-
     }
+
 }

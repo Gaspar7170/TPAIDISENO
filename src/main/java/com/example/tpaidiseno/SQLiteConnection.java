@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class SQLiteConnection {
 
-    private static final String URL = "jdbc:sqlite:C:\\Users\\Arrigo\\IdeaProjects\\PPAINUEVO\\TPAIDISENO\\BD.db"; // Ruta a tu archivo SQLite
+    private static final String URL = "jdbc:sqlite:C:\\Users\\54352\\TPAIDISENO\\BD.db"; // Ruta a tu archivo SQLite
 
     public static Connection connect() {
         Connection conn = null;
