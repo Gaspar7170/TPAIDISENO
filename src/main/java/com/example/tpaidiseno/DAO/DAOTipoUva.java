@@ -43,7 +43,7 @@ public class DAOTipoUva {
             ps.setInt(1,id);
             ResultSet rs = ps.executeQuery();
 
-            if (rs.first()){
+            if (rs.next()){
 
                 tipoUva.setNombre(rs.getString("nombre"));
                 tipoUva.setDescripcion(rs.getString("descripcion"));

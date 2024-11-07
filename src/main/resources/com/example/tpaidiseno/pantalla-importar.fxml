@@ -27,15 +27,12 @@
          
                  <Label maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="196.0" style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: black;" text="Bodega para Actualizar" GridPane.columnIndex="1" />
          
-                 <TableView fx:id="bodegasTableView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="554.0" style="-fx-font-size: 24px; -fx-border-color: #000000; -fx-background-color: #FFFFFF;" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                     <columns>
-                         <TableColumn minWidth="400.0" prefWidth="400.0" text="Nombre de Bodega" />
-                     </columns>
-                 </TableView>
+                 <ListView fx:id="grillaBodegasActualizar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="554.0" style="-fx-font-size: 24px; -fx-border-color: #000000; -fx-background-color: #FFFFFF;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                 </ListView>
          
-                 <Button fx:id="seleccionBodegaBoton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="39.0" prefWidth="221.0" style="-fx-font-size: 18px;" text="Seleccionar" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                 <Button fx:id="seleccionBodegaBoton_Click" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="39.0" prefWidth="221.0" style="-fx-font-size: 18px;" text="Seleccionar" GridPane.columnIndex="1" GridPane.rowIndex="3" onAction="#selOpTomarSeleccionBodega" />
          
-                 <TextField fx:id="bodegaSeleccionadaTextbox" editable="false" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="100.0" style="-fx-font-size: 40px;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                 <TextField fx:id="bodegaSeleccionadaTextbox" editable="false" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="60.0" prefWidth="100.0" style="-fx-font-size: 24px;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          
                  <Label prefHeight="30.0" prefWidth="213.0" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: black;" text="Bodega Seleccionada" GridPane.columnIndex="2" GridPane.rowIndex="3" />
          

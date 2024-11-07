@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class DAOVino {
 
     public static List<Vino> getAll(){
         Connection con = SQLiteConnection.connect();
-        String sql = "SELECT id,bodega_id,anio,fecha_caducidad,comentarios,nombre,descripcion,precio,maridaje_id FROM vinos ";
+        String sql = "SELECT id,bodega_id,anio,fecha_actualizacion,comentarios,nombre,descripcion,precio,maridaje_id FROM vinos ";
         List<Vino> vinos = new ArrayList<>();
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -30,6 +31,8 @@ public class DAOVino {
                 vino.setNotaDeCataBodega(rs.getString("descripcion"));
                 vino.setPrecioARS(rs.getDouble("precio"));
                 vino.setMaridaje(DAOMaridaje.getById(rs.getInt("maridaje_id")));
+                vino.setFechaActualizacion(LocalDate.parse(rs.getString("fecha_actualizacion")));
+                //vino.setVariedades(DAOVarietal.getById(rs.getInt("varietal_id")));
 
                 vinos.add(vino);
             }

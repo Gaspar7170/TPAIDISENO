@@ -46,7 +46,7 @@ public class DAOVarietal {
             ps.setInt(1,id);
             ResultSet rs = ps.executeQuery();
 
-            if (rs.first()){
+            if (rs.next()){
 
                 varietal.setNombre(rs.getString("nombre"));
                 varietal.setPorcentajeComposicion(rs.getDouble("porcentaje"));

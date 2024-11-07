@@ -7,15 +7,11 @@ import com.example.tpaidiseno.DAO.DAOVino;
 import com.example.tpaidiseno.Entidades.*;
 import com.example.tpaidiseno.Interfaces.IObserverNotificacionActualizacion;
 import com.example.tpaidiseno.Interfaces.ISujetoNotificacionActualizacion;
-import com.example.tpaidiseno.InterfazNotificacionPush;
 import com.example.tpaidiseno.PantallaImportarActualizacion;
-import javafx.scene.image.Image;
 //import BonVinoGrupo12.Modelo.*;
 
 import javax.swing.*;
-import java.awt.image.BufferedImage;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,17 +20,17 @@ public class GestorImportarActualizacion implements ISujetoNotificacionActualiza
 
     // Atributos
     private final PantallaImportarActualizacion pantalla;
-    private final List<Bodega> listadoBodegasCompleto = new ArrayList<>();
+    private List<Bodega> listadoBodegasCompleto = new ArrayList<>();
     private final List<String> nombresBodegaActualizar = new ArrayList<>();
     private final List<Bodega> listadoParaActualizar = new ArrayList<>();
-    private final List<Vino> listadoVinosActualizarCompleto = new ArrayList<>();
+    private List<Vino> listadoVinosActualizarCompleto = new ArrayList<>();
     private List<Vino> listadoVinosActualizarBodega = new ArrayList<>();
     private Bodega BodegaSeleccionada;
     private final Map<Bodega, List<Vino>> bodegasXvino = new HashMap<>();
     private final List<Maridaje> listadoMaridajeCompleto = new ArrayList<>();
     private final List<TipoUva> listadoTipoUvaCompleto = new ArrayList<>();
     private final List<Varietal> listadoVariedadesCompleto = new ArrayList<>();
-    private final List<Enofilo> listadoEnofilosAplicacion = new ArrayList<>();
+    private List<Enofilo> listadoEnofilosAplicacion = new ArrayList<>();
     private boolean activarAlternativo3 = false;
     private List<IObserverNotificacionActualizacion> observers = new ArrayList<>();
 
@@ -55,8 +51,10 @@ public class GestorImportarActualizacion implements ISujetoNotificacionActualiza
         listadoParaActualizar.clear();
         nombresBodegaActualizar.clear();
 
+
+
         for (Bodega bod : listadoBodegasCompleto) {
-            if (bod.estaEnPeriodoDeActualizacion(LocalDateTime.from(fechaHoy))) {
+            if (bod.estaEnPeriodoDeActualizacion(fechaHoy)) {
                 nombresBodegaActualizar.add(bod.getNombre());
                 listadoParaActualizar.add(bod);
             }
@@ -81,7 +79,7 @@ public class GestorImportarActualizacion implements ISujetoNotificacionActualiza
                 .findFirst()
                 .orElse(new Bodega());
 
-        if (BodegaSeleccionada == null || BodegaSeleccionada.getNombre() == null) return;
+        if (BodegaSeleccionada.getNombre() == null) return;
 
         if (!listadoVinosActualizarBodega.isEmpty()) actualizarOCrearVinos();
     }
@@ -131,7 +129,7 @@ public class GestorImportarActualizacion implements ISujetoNotificacionActualiza
             });
         }
 
-        BodegaSeleccionada.setUltimaActualizacion(LocalDateTime.from(LocalDate.now()));
+        BodegaSeleccionada.setUltimaActualizacion(getFechaActual());
         pantalla.mostrarResumenVinos(resumenVinos);
         buscarSeguidoresBodega();
     }
@@ -202,11 +200,12 @@ public class GestorImportarActualizacion implements ISujetoNotificacionActualiza
 
     private void crearListadoVinos() {
 
-        List<Bodega> listadoBodegasCompleto = DAOBodega.getAll();
+        listadoBodegasCompleto = DAOBodega.getAll();
 
-        List<Vino> listadoVinosActualizarCompleto = DAOVino.getAll();
+        listadoVinosActualizarCompleto = DAOVino.getAll();
 
-        List<Enofilo> listadoEnofilosAplicacion = DAOEnofilo.getAll();
+
+        listadoEnofilosAplicacion = DAOEnofilo.getAll();
     }
 
 

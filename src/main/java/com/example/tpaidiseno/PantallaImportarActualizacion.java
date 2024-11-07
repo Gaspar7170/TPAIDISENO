@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -17,17 +18,20 @@ public class PantallaImportarActualizacion {
     @FXML
     private GridPane gridBodegasActualizar = new GridPane();
 
-    @FXML
-    private TableView<String> grillaBodegasActualizar = new TableView<>(); // Cambiado a TableView<String>
+    //@FXML
+    //private TableView<String> grillaBodegasActualiza = new TableView<>(); // Cambiado a TableView<String>
 
     @FXML
-    private Button seleccionBodegaBoton;
+    private Button seleccionBodegaBoton_Click;
 
     @FXML
     private TextField bodegaSeleccionadaTextbox;
 
     @FXML
     private GridPane gridMostrarResumenVino;
+
+    @FXML
+    private ListView<String> grillaBodegasActualizar;
 
     @FXML
     private TableView<Object> grillaResumenesVino = new TableView<>();
@@ -52,7 +56,7 @@ public class PantallaImportarActualizacion {
     private void seleccionBodegaBoton_Click() {
         selOpTomarSeleccionBodega();
     }
-
+    /*
     private void selOpTomarSeleccionBodega() {
         grillaResumenesVino.setItems(null);
         int index = grillaBodegasActualizar.getSelectionModel().getSelectedIndex();
@@ -64,12 +68,28 @@ public class PantallaImportarActualizacion {
             showErrorMessage("ERROR: No se seleccionó ninguna bodega");
         }
     }
+     */
+    public void selOpTomarSeleccionBodega() {
+        grillaResumenesVino.setItems(null);
+
+        String nombre = grillaBodegasActualizar.getSelectionModel().getSelectedItem();
+        if (nombre != null) {
+            bodegaSeleccionadaTextbox.setText(nombre);
+            gestorImportar.tomarSeleccionBodega(nombre);
+        } else {
+            showErrorMessage("ERROR: No se seleccionó ninguna bodega");
+        }
+    }
+
 
     public void mostrarBodegasParaActualizar(List<String> bodegasActualizar) {
         listadoBodegasParaSeleccion = bodegasActualizar;
         ObservableList<String> data = FXCollections.observableArrayList(listadoBodegasParaSeleccion);
         grillaBodegasActualizar.setItems(data);
     }
+
+
+
 
     public void mostrarResumenVinos(List<Object> data) {
         gridMostrarResumenVino.setVisible(true);

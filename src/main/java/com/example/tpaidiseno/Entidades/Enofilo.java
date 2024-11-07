@@ -93,4 +93,15 @@ public class Enofilo {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    @Override
+    public String toString() {
+        return "Enofilo{" +
+                "apellido='" + apellido + '\'' +
+                ", imagenPerfil=" + imagenPerfil +
+                ", nombre='" + nombre + '\'' +
+                ", seguido=" + seguido +
+                ", usuario=" + usuario +
+                '}';
+    }
 }

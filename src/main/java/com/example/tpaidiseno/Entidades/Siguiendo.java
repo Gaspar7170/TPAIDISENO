@@ -58,6 +58,15 @@ public class Siguiendo {
         this.amigo = amigo;
     }
 
+    @Override
+    public String toString() {
+        return "Siguiendo{" +
+                "fechaInicio=" + fechaInicio +
+                ", fechaFin=" + fechaFin +
+                ", bodega=" + bodega +
+                '}';
+    }
+
     /**
      * Step 7 of Use Case
      * Checks if this following relationship is with the specified bodega

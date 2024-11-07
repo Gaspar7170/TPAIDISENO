@@ -1,14 +1,17 @@
 package com.example.tpaidiseno.Entidades;
 
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 public class Bodega {
     private String coordenadasUbicacion;
     private String descripcion;
     private String historia;
-    private LocalDateTime fechaUltimaActualizacion;
+    private LocalDate fechaUltimaActualizacion;
     private String nombre;
     // Este atributo representa los meses para actualizar
     private int periodoActualizacion;
@@ -16,14 +19,14 @@ public class Bodega {
     public Bodega() {
     }
 
-    public Bodega(String nombre, LocalDateTime fechaUltima, int periodo) {
+    public Bodega(String nombre, LocalDate fechaUltima, int periodo) {
         this.nombre = nombre;
         this.fechaUltimaActualizacion = fechaUltima;
         this.periodoActualizacion = periodo;
     }
 
     // region Paso 2 del Caso de Uso
-    public boolean estaEnPeriodoDeActualizacion(LocalDateTime hoy) {
+    public boolean estaEnPeriodoDeActualizacion(LocalDate hoy) {
         // Calculamos la fecha la ultima fecha de actualizacion mas periodo actualizacion (meses) y lo comparamos con la fecha de hoy
         return hoy.isAfter(fechaUltimaActualizacion.plusMonths(periodoActualizacion));
     }
@@ -52,11 +55,11 @@ public class Bodega {
         this.historia = historia;
     }
 
-    public LocalDateTime getFechaUltimaActualizacion() {
+    public LocalDate getFechaUltimaActualizacion() {
         return fechaUltimaActualizacion;
     }
 
-    public void setFechaUltimaActualizacion(LocalDateTime fechaUltimaActualizacion) {
+    public void setFechaUltimaActualizacion(LocalDate fechaUltimaActualizacion) {
         this.fechaUltimaActualizacion = fechaUltimaActualizacion;
     }
 
@@ -76,6 +79,15 @@ public class Bodega {
         this.periodoActualizacion = periodoActualizacion;
     }
 
+    @Override
+    public String toString() {
+        return "Bodega{" +
+                ", nombre='" + nombre + '\'' +
+                ", fechaUltimaActualizacion=" + fechaUltimaActualizacion +
+                ", periodoActualizacion=" + periodoActualizacion +
+                "\n}";
+    }
+
     // endregion
 
     // region Paso 5 y 6 del Caso de Uso
@@ -89,14 +101,14 @@ public class Bodega {
                     vinosBodega.setImagenEtiqueta(vinoActualizado.getImagenEtiqueta());
                     // Esto lo dejamos porque sino no se actualizaria
                     LocalDateTime fechaActualizarNueva = LocalDateTime.now().plusMonths(periodoActualizacion);
-                    vinosBodega.setFechaActualizacion(fechaActualizarNueva);
+                    vinosBodega.setFechaActualizacion(LocalDate.from(fechaActualizarNueva));
                     return; // Si lo encuentra pero no se actualiza se corta el ciclo
                 }
             }
         }
     }
 
-    public void setUltimaActualizacion(LocalDateTime fecha) {
+    public void setUltimaActualizacion(LocalDate fecha) {
         this.fechaUltimaActualizacion = fecha;
     }
     // endregion

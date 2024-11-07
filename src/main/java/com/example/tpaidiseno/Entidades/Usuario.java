@@ -54,4 +54,12 @@ public class Usuario {
         this.premium = premium;
     }
 
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "nombre='" + nombre + '\'' +
+                ", contrasenia='" + contrasenia + '\'' +
+                ", premium=" + premium +
+                '}';
+    }
 }

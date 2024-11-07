@@ -3,14 +3,16 @@ package com.example.tpaidiseno.Entidades;
 
 import javafx.scene.image.Image;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDateTime;
 import java.util.List;
 
 public class Vino {
     // Es aniada es por no utilizar ñ en un atributo
     private Bodega bodega;
     private int aniada;
-    private LocalDateTime fechaActualizacion;
+    private LocalDate fechaActualizacion;
     // Este tambien puede ser byte[]
     private Image imagenEtiqueta;
     private String nombre;
@@ -22,7 +24,7 @@ public class Vino {
     public Vino() {
     }
 
-    public Vino(Bodega bodega, int aniada, LocalDateTime fechaActualizacion,
+    public Vino(Bodega bodega, int aniada, LocalDate fechaActualizacion,
                 Image imagenEtiqueta, String nombre, String notaDeCataBodega,
                 double precioARS, Maridaje maridaje, List<Varietal> variedades) {
         this.bodega = bodega;
@@ -38,7 +40,7 @@ public class Vino {
 
     // region Paso 6 del Caso de Uso
     public boolean sosVinoParaActualizar() {
-        return LocalDateTime.now().isAfter(fechaActualizacion);
+        return LocalDateTime.now().isAfter(ChronoLocalDateTime.from(fechaActualizacion));
     }
 
     public Bodega getBodega() {
@@ -94,11 +96,11 @@ public class Vino {
         this.imagenEtiqueta = image;
     }
 
-    public LocalDateTime getFechaActualizacion() {
+    public LocalDate getFechaActualizacion() {
         return fechaActualizacion;
     }
 
-    public void setFechaActualizacion(LocalDateTime fecha) {
+    public void setFechaActualizacion(LocalDate fecha) {
         this.fechaActualizacion = fecha;
     }
 
@@ -118,5 +120,17 @@ public class Vino {
     public int getAnianada() {
         return aniada;
     }
-    // endregion
+
+    @Override
+    public String toString() {
+        return "Vino{" +
+                "bodega=" + bodega +
+                ", aniada=" + aniada +
+                ", fechaActualizacion=" + fechaActualizacion +
+                ", nombre='" + nombre + '\'' +
+                ", notaDeCataBodega='" + notaDeCataBodega + '\'' +
+                ", precioARS=" + precioARS +
+                ", maridaje=" + maridaje +
+                "\n}";
+    }
 }
