@@ -7,7 +7,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -35,7 +34,7 @@ public class PantallaImportarActualizacion {
     private ListView<String> grillaBodegasActualizar;
 
     @FXML
-    private TableView<Object> grillaResumenesVino = new TableView<>();
+    private ListView<Object> grillaResumenesVino;
 
     private GestorImportarActualizacion gestorImportar;
     private List<Bodega> listadoBodegasParaSeleccion;
@@ -47,6 +46,7 @@ public class PantallaImportarActualizacion {
 
         gridMostrarResumenVino.setVisible(false);
     }
+
 
     @FXML
     private void grillaBodegasActualizar_MouseDoubleClick(MouseEvent event) {

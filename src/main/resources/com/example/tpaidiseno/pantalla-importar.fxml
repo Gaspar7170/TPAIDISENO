@@ -56,8 +56,10 @@
          
          
                  <Label minHeight="-Infinity" minWidth="-Infinity" style="-fx-font-size: 60px; -fx-font-weight: bold; -fx-text-fill: black;" text="Resumen de Vinos Actualizados" GridPane.columnIndex="1" />
-         
-                 <TableView fx:id="resumenTableView" minHeight="-Infinity" minWidth="-Infinity" style="-fx-font-size: 24px; -fx-border-color: transparent; -fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+
+             <ListView fx:id="grillaResumenesVino" minHeight="-Infinity" minWidth="-Infinity" style="-fx-font-size: 24px; -fx-border-color: transparent; -fx-background-color: transparent;" GridPane.columnIndex="1" GridPane.rowIndex="1" >
+             </ListView>
          </children>
                <columnConstraints>
                   <ColumnConstraints />
