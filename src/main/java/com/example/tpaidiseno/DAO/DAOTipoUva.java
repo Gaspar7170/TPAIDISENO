@@ -13,7 +13,7 @@ import java.util.List;
 
 public class DAOTipoUva {
 
-    public static List<TipoUva> getAll(){
+    public static List<TipoUva> getAll() {
         Connection con = SQLiteConnection.connect();
         String sql = "SELECT id,nombre,descripcion FROM tipos_uva ";
         List<TipoUva> tiposUvas = new ArrayList<>();
@@ -21,7 +21,7 @@ public class DAOTipoUva {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
-            while (rs.next()){
+            while (rs.next()) {
                 TipoUva tipoUva = new TipoUva();
                 tipoUva.setId(rs.getInt("id"));
                 tipoUva.setNombre(rs.getString("nombre"));
@@ -29,28 +29,29 @@ public class DAOTipoUva {
                 tiposUvas.add(tipoUva);
             }
 
-        }catch (SQLException eSql){
+        } catch (SQLException eSql) {
             eSql.printStackTrace();
         }
         return tiposUvas;
     }
 
-    public static TipoUva getById(int id){
-        Connection con = SQLiteConnection.connect();
-        String sql = "SELECT id,nombre,contraseña,es_admin FROM usuarios WHERE id = ?";
-        TipoUva tipoUva = new TipoUva();
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1,id);
-            ResultSet rs = ps.executeQuery();
+    public static TipoUva getById(int id) {
 
-            if (rs.next()){
-                tipoUva.setId(rs.getInt("id"));
-                tipoUva.setNombre(rs.getString("nombre"));
-                tipoUva.setDescripcion(rs.getString("descripcion"));
+        String sql = "SELECT id,nombre,descripcion FROM tipos_uva WHERE id = ?";
+        TipoUva tipoUva = new TipoUva();
+        try (Connection con = SQLiteConnection.connect();
+             PreparedStatement ps = con.prepareStatement(sql);) {
+            ps.setInt(1, id);
+            try (ResultSet rs = ps.executeQuery();) {
+
+                if (rs.next()) {
+                    tipoUva.setId(rs.getInt("id"));
+                    tipoUva.setNombre(rs.getString("nombre"));
+                    tipoUva.setDescripcion(rs.getString("descripcion"));
+                }
             }
 
-        }catch (SQLException eSql){
+        } catch (SQLException eSql) {
             eSql.printStackTrace();
         }
         return tipoUva;

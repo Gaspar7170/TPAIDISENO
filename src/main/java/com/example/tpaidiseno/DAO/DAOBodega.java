@@ -39,28 +39,46 @@ public class DAOBodega {
     }
 
 
-    public static Bodega getById(int id){
-        Connection con = SQLiteConnection.connect();
-        String sql = "SELECT id,nombre,fecha_ultima_actualizacion,periodo FROM bodegas WHERE id = ?";
+    public static Bodega getById(int id) {
+        String sql = "SELECT id, nombre, fecha_ultima_actualizacion, periodo FROM bodegas WHERE id = ?";
         Bodega bodega = new Bodega();
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1,id);
-            ResultSet rs = ps.executeQuery();
 
-            if (rs.next()){
-                bodega.setId(rs.getInt("id"));
-                bodega.setNombre(rs.getString("nombre"));
-                bodega.setUltimaActualizacion(LocalDate.parse(rs.getString("fecha_ultima_actualizacion")));
-                bodega.setPeriodoActualizacion(rs.getInt("periodo"));
+        try (Connection con = SQLiteConnection.connect();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
+            ps.setInt(1, id);
 
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    bodega.setId(rs.getInt("id"));
+                    bodega.setNombre(rs.getString("nombre"));
+                    bodega.setUltimaActualizacion(LocalDate.parse(rs.getString("fecha_ultima_actualizacion")));
+                    bodega.setPeriodoActualizacion(rs.getInt("periodo"));
+                }
             }
 
-        }catch (SQLException eSql){
+        } catch (SQLException eSql) {
             eSql.printStackTrace();
         }
+
         return bodega;
     }
 
+
+    public static void actualizarFechaActualizacion(Bodega bodegaSeleccionada) {
+
+        String sql = "UPDATE bodegas SET fecha_ultima_actualizacion = ?";
+        Bodega bodega = new Bodega();
+
+        try (Connection con = SQLiteConnection.connect();
+             PreparedStatement ps = con.prepareStatement(sql)) {
+
+            ps.setString(1, bodegaSeleccionada.getFechaUltimaActualizacion().toString());
+
+            ps.executeUpdate();
+
+        } catch (SQLException eSql) {
+            eSql.printStackTrace();
+        }
+    }
 }

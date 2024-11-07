@@ -12,15 +12,16 @@ import java.util.List;
 
 public class DAOUsuario {
 
-    public static List<Usuario> getAll(){
-        Connection con = SQLiteConnection.connect();
+    public static List<Usuario> getAll() {
+
         String sql = "SELECT id,nombre,contraseña,es_admin FROM usuarios ";
         List<Usuario> usuarios = new ArrayList<>();
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+        try (Connection con = SQLiteConnection.connect();
+             PreparedStatement ps = con.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery();){
 
-            while (rs.next()){
+
+            while (rs.next()) {
                 Usuario us = new Usuario();
                 us.setNombre(rs.getString("nombre"));
                 us.setContrasenia(rs.getString("contraseña"));
@@ -28,30 +29,33 @@ public class DAOUsuario {
                 usuarios.add(us);
             }
 
-        }catch (SQLException eSql){
+        } catch (SQLException eSql) {
             eSql.printStackTrace();
         }
         return usuarios;
     }
 
-    public static Usuario getById(int id){
-        Connection con = SQLiteConnection.connect();
+    public static Usuario getById(int id) {
+
         String sql = "SELECT id,nombre,contraseña,es_admin FROM usuarios WHERE id = ?";
         Usuario usuario = new Usuario();
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1,id);
-            ResultSet rs = ps.executeQuery();
+        try (Connection con = SQLiteConnection.connect();
+             PreparedStatement ps = con.prepareStatement(sql)) {
 
-            if (rs.next()){
+            ps.setInt(1, id);
 
-                usuario.setNombre(rs.getString("nombre"));
-                usuario.setContrasenia(rs.getString("contraseña"));
-                usuario.setPremium(rs.getBoolean("es_admin"));
+            try (ResultSet rs = ps.executeQuery();) {
 
+                if (rs.next()) {
+
+                    usuario.setNombre(rs.getString("nombre"));
+                    usuario.setContrasenia(rs.getString("contraseña"));
+                    usuario.setPremium(rs.getBoolean("es_admin"));
+
+                }
             }
 
-        }catch (SQLException eSql){
+        } catch (SQLException eSql) {
             eSql.printStackTrace();
         }
         return usuario;
